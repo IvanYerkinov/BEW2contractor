@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+<table>
+    <tr>
+{% for clock in clocks %}
+<th>
+
+<td class="card" style="width:10rem;">
+
+<b style="font-size:125%">{{ clock.name }}</b>
+<p style="font-size:75%;">{{ clock.desc }}</p>
+<div class="col-lg-10">
+
+<p>Ticks: {{ clock.ticks }} / {{ clock.tocks }}</p>
+<form action="/down/" method="post">
+    {% csrf_token %}
+    <button type="submit" name="tickdown" value="{{ clock.id }}">Tick down</button>
+</form>
+<form action="/up/" method="post">
+    {% csrf_token %}
+    <button type="submit" name="tickup" value="{{ clock.id }}">Tick up</button>
+</form>
+<form action="/rem/" method="post">
+    {% csrf_token %}
+    <button type="submit" name="delete" value="{{ clock.id }}">Delete</button>
+</form>
+<br>
+
+</div>
+
+</td>
+</th>
+
+{% endfor %}
+</tr>
+</table>
+</div>
+{% endblock %}
